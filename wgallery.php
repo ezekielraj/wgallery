@@ -24,13 +24,21 @@ $category_query_args = array(
 
      $category_query = get_posts( $category_query_args );
 $cont = "";
+$cont .= "<script type='text/javascript' src='".get_template_directory_uri()."/js/widget_banner.js'></script>";
+$cont .= "<link rel=\"stylesheet\" href=\"".get_template_directory_uri()."/css/widget_banner.css\" type=\"text/css\" />";
+	$cont .= "<div id=\"widget_banner\">";
 	foreach( $category_query as $cq ){
-?>
 //		$cont .= $cq->post_title;	
 //		$cont .= $cq->post_content;	
-<?php
+
+	$cont .= "<div>"; 
+	$cont .= "<p>".$cq->post_title."</p>"; 
+	$cont .= $cq->post_content; 
+	$cont .= "</div>"; 
+
 	}
 
+$cont .= "</div>";
      return $cont;
 
 }
