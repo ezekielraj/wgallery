@@ -43,9 +43,34 @@ $cont .= "</div>";
 
 }
 
+function singlepost_func( $atts ){
+
+	$atts = shortcode_atts(
+		array(
+			'postid' => '0',
+		), $atts, 'single_post' );
+
+		$category_query = get_post( $atts['postid'] );		
+		
+		$cont = "";
+		$cont .= "<script type='text/javascript' src='".get_template_directory_uri()."/js/single-post.js'></script>";
+		$cont .= "<link rel=\"stylesheet\" href=\"".get_template_directory_uri()."/css/single-post.css\" type=\"text/css\" />";
+		
+		$cont .= "<div id='single-post'>";
+		$cont .= $category_query->post_content;
+		$cont .= "</div>";
+		$cont .= "<div id='sp_readmore'><a href='".$category_query->guid."'>Read more</a></div>";
+		return $cont;
+	
+}
+
 function wporg_shortcodes_init()
 {
     add_shortcode('widget_gallery', 'wgallery_func');
+    add_shortcode('single_post', 'singlepost_func');
+	
 }
  
 add_action('init', 'wporg_shortcodes_init');
+
+
